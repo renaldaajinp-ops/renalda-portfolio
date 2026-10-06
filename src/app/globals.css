@@ -1,26 +1,157 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Breakpoints follow the six Figma frames: 375/390 (base), 834, 1024, 1440, 1728. */
+@theme {
+  --breakpoint-tab: 834px;
+  --breakpoint-lap: 1024px;
+  --breakpoint-desk: 1440px;
+  --breakpoint-wide: 1728px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-noto-serif-display);
+  --font-chivo: var(--font-chivo-mono);
+  --font-pixel: var(--font-press-start);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: #0a0a0a;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Text inside the exported process windows (inline SVG). */
+.ff-sans {
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+.ff-mono {
+  font-family: var(--font-chivo-mono), ui-monospace, monospace;
+}
+
+/* Keycaps in the Cat Runner legend use a rounded system face, as in Figma. */
+.font-keycap {
+  font-family: ui-rounded, "SF Pro Rounded", "SF Compact Rounded", system-ui, sans-serif;
+}
+
+/* Hero smoke: anchored to the hero centre (x) and bottom (y); 1.2× at 1728. */
+.hero-smoke {
+  left: calc(50% + var(--dx));
+  top: calc(100% - var(--db));
+  width: var(--w);
+  height: var(--h);
+}
+@media (width >= 1728px) {
+  .hero-smoke {
+    left: calc(50% + var(--dx-wide));
+    top: calc(100% - var(--db-wide));
+    width: var(--w-wide);
+    height: var(--h-wide);
+  }
+}
+
+/* ---------- Motion ---------- */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.hero-enter {
+  animation: fade-up 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes cloud-drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(var(--drift, 24px));
+  }
+}
+.cloud-drift {
+  animation: cloud-drift var(--drift-duration, 18s) ease-in-out infinite alternate;
+}
+
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.marquee-left {
+  animation: marquee-left var(--marquee-duration, 60s) linear infinite;
+}
+.marquee-right {
+  animation: marquee-right var(--marquee-duration, 60s) linear infinite;
+}
+.marquee:hover .marquee-left,
+.marquee:hover .marquee-right {
+  animation-play-state: paused;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .marquee-left,
+  .marquee-right,
+  .cloud-drift {
+    animation: none !important;
+  }
 }
