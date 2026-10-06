@@ -25,22 +25,22 @@ const YEAR = "2026";
 function Card({ project }: { project: (typeof PROJECTS)[number] }) {
   return (
     <a href={links.project(project.slug)} className="group flex min-w-0 flex-col items-start gap-4">
-      <div className="relative aspect-[368/276] w-full shrink-0 overflow-hidden rounded-2xl border border-[rgba(0,0,0,0.06)] bg-[#f4f4f5]">
+      <div className="relative aspect-[368/276] w-full shrink-0 overflow-hidden rounded-2xl border border-[rgba(0,0,0,0.06)] bg-[#f4f4f5] transition-[translate] duration-[280ms] ease-out-soft motion-safe:group-hover:-translate-y-1">
         <img
           src={`/portfolio/${project.slug}.webp`}
           alt={project.name}
           width={368}
           height={276}
           loading="lazy"
-          className="absolute inset-0 block size-full object-cover"
+          className="absolute inset-0 block size-full object-cover transition-[scale] duration-[600ms] ease-out-soft motion-safe:group-hover:scale-[1.03]"
         />
         {/* State=Hover: gradient overlay with category, name and open button (smart animate, 200ms ease-out). */}
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0)_35%,rgba(0,0,0,0.62)_100%)] opacity-0 transition-opacity duration-200 ease-out group-hover:opacity-100 group-focus-visible:opacity-100">
-          <div className="absolute bottom-6 left-6 flex flex-col gap-1 text-white">
+          <div className="absolute bottom-6 left-6 flex flex-col gap-1 text-white transition-[translate] duration-[280ms] ease-out-soft motion-safe:translate-y-1.5 motion-safe:group-hover:translate-y-0 motion-safe:group-focus-visible:translate-y-0">
             <span className="text-[12px] leading-4 font-medium tracking-[0.04em] uppercase opacity-80">{project.category}</span>
             <span className="text-[20px] leading-[26px] font-medium">{project.name}</span>
           </div>
-          <span className="absolute right-6 bottom-6 flex size-10 items-center justify-center rounded-full bg-white shadow-[0px_4px_12px_0px_rgba(0,0,0,0.18)]">
+          <span className="absolute right-6 bottom-6 flex size-10 items-center justify-center rounded-full bg-white shadow-[0px_4px_12px_0px_rgba(0,0,0,0.18)] transition-[scale] duration-[280ms] ease-out-soft motion-safe:scale-90 motion-safe:group-hover:scale-100 motion-safe:group-focus-visible:scale-100">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden>
               <path d="M6 12L12 6M6.5 6H12V11.5" stroke="#0a0a0a" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -96,7 +96,7 @@ export function Portfolio() {
                     role="tab"
                     aria-selected={active}
                     onClick={() => setTab(t)}
-                    className={`cursor-pointer rounded-full px-4 py-2 text-[15px] leading-5 font-medium whitespace-nowrap transition-[background-color,color,filter] duration-200 ease-out ${
+                    className={`cursor-pointer rounded-full px-4 py-2 text-[15px] leading-5 font-medium whitespace-nowrap transition-[background-color,color,filter,scale] duration-200 ease-out-soft active:scale-[0.97] ${
                       active
                         ? "bg-white text-[#0a0a0a] drop-shadow-[0px_2px_3px_rgba(15,15,41,0.06)]"
                         : "text-[#6b6b70] hover:text-[#0a0a0a]"
@@ -109,16 +109,19 @@ export function Portfolio() {
             </div>
           </div>
 
-          <div className="grid w-full grid-cols-1 gap-x-6 gap-y-8 tab:grid-cols-2 tab:gap-y-10 lap:grid-cols-3">
-            {shown.map((p) => (
-              <Card key={p.slug} project={p} />
+          {/* Keyed by tab so a filter change re-runs the staggered reveal on the new set. */}
+          <div key={tab} className="grid w-full grid-cols-1 gap-x-6 gap-y-8 tab:grid-cols-2 tab:gap-y-10 lap:grid-cols-3">
+            {shown.map((p, i) => (
+              <Reveal key={p.slug} delay={Math.min(i, 5) * 50} className="min-w-0">
+                <Card project={p} />
+              </Reveal>
             ))}
           </div>
 
           <div className="flex w-full justify-center">
             <a
               href={links.seeMoreWork}
-              className="relative flex h-12 items-center justify-center overflow-hidden rounded-3xl border border-[#94bdff] bg-[#121212] px-6 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.2)] transition-[box-shadow,filter] duration-200 ease-out hover:shadow-[0px_2px_4px_0px_rgba(0,0,0,0.2),0px_8px_24px_0px_rgba(11,36,71,0.14)] hover:brightness-125 active:brightness-100"
+              className="relative flex h-12 items-center justify-center overflow-hidden rounded-3xl border border-[#94bdff] bg-[#121212] px-6 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.2)] transition-[box-shadow,filter,translate,scale] duration-200 ease-out-soft motion-safe:hover:-translate-y-px hover:shadow-[0px_2px_4px_0px_rgba(0,0,0,0.2),0px_8px_24px_0px_rgba(11,36,71,0.14)] hover:brightness-125 active:translate-y-0 active:scale-[0.98] active:brightness-100"
             >
               <span className="relative text-[16px] leading-none font-medium whitespace-nowrap text-white">See more</span>
               <span className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_-4px_4px_0px_rgba(148,189,255,0.8)]" />

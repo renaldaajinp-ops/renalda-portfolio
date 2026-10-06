@@ -178,10 +178,19 @@ export function Hero() {
         <div className="absolute bottom-[-655px] left-0 h-[874px] w-full bg-gradient-to-b from-[rgba(255,255,255,0)] to-white to-[21.154%]" />
       </div>
 
+      {/* First-load veil: the base sky colour fading off the layers above (decorative, motion only). */}
+      <div aria-hidden className="hero-veil pointer-events-none absolute inset-0 bg-[#1a5a9f] opacity-0 [mask-image:linear-gradient(180deg,#000_55%,transparent_88%)]" />
+
       {/* ---------- Navigation ---------- */}
-      <nav className="relative flex w-full shrink-0 items-center gap-6 px-5 pt-5 tab:px-8 tab:pt-7 desk:px-10">
+      <nav
+        className="hero-nav-enter relative flex w-full shrink-0 items-center gap-6 px-5 pt-5 tab:px-8 tab:pt-7 desk:px-10"
+        style={{ animationDelay: "80ms" }}
+      >
         <div className="flex min-w-px flex-[1_0_0] items-center gap-3">
-          <a href={links.home} className="text-[18px] leading-none font-medium whitespace-nowrap text-white tab:text-[24px]">
+          <a
+            href={links.home}
+            className="text-[18px] leading-none font-medium whitespace-nowrap text-white transition-opacity duration-200 ease-out hover:opacity-80 tab:text-[24px]"
+          >
             Dekstive Studio
           </a>
           <div className="hidden items-center self-stretch border-l border-[rgba(255,255,255,0.64)] pl-3 tab:flex">
@@ -190,7 +199,11 @@ export function Hero() {
             </p>
           </div>
         </div>
-        <a href={links.home} aria-label="Dekstive Studio" className="relative block size-10 shrink-0 tab:size-14">
+        <a
+          href={links.home}
+          aria-label="Dekstive Studio"
+          className="relative block size-10 shrink-0 transition-[opacity,scale] duration-200 ease-out-soft hover:opacity-90 active:scale-[0.96] tab:size-14"
+        >
           <img
             src="/svg/logo.svg"
             alt=""
@@ -206,7 +219,7 @@ export function Hero() {
           <ThemeSwitch />
           <a
             href={links.contact}
-            className="hidden h-9 items-center justify-center rounded-[32px] border border-[rgba(255,255,255,0.24)] bg-[rgba(255,255,255,0.1)] px-5 backdrop-blur-[6px] transition-colors duration-200 hover:bg-[rgba(255,255,255,0.18)] tab:flex"
+            className="hidden h-9 items-center justify-center rounded-[32px] border border-[rgba(255,255,255,0.24)] bg-[rgba(255,255,255,0.1)] px-5 backdrop-blur-[6px] transition-[background-color,border-color,scale] duration-200 ease-out-soft hover:bg-[rgba(255,255,255,0.18)] active:scale-[0.97] tab:flex"
           >
             <span className="text-[14px] leading-none font-medium whitespace-nowrap text-white">Contact Us</span>
           </a>
@@ -215,24 +228,29 @@ export function Hero() {
 
       {/* ---------- Content ---------- */}
       <div className="relative flex w-full shrink-0 flex-col items-center justify-center gap-11 px-5 pt-24 pb-30 tab:px-8 tab:py-30">
-        <div className="hero-enter flex w-full flex-col items-center gap-6 desk:w-[1100px]">
-          <div className="flex items-center gap-2.5 overflow-hidden rounded-[100px] border border-[rgba(255,255,255,0.24)] bg-[rgba(255,255,255,0.16)] px-4 py-3">
+        <div className="flex w-full flex-col items-center gap-6 desk:w-[1100px]">
+          <div
+            className="hero-enter flex items-center gap-2.5 overflow-hidden rounded-[100px] border border-[rgba(255,255,255,0.24)] bg-[rgba(255,255,255,0.16)] px-4 py-3"
+            style={{ animationDelay: "120ms" }}
+          >
             <span className="size-1.5 shrink-0 bg-[#fff4dc] shadow-[0px_0px_6px_0px_rgba(255,242,214,0.75)]" />
             <p className="text-[13px] leading-none font-medium tracking-[0.26px] whitespace-nowrap text-white uppercase tab:text-[16px] tab:tracking-[0.32px]">
               Available for new project in october
             </p>
           </div>
-          <h1 className="w-full text-center font-display text-[38px] leading-[1.16] font-medium tracking-[-0.02em] text-[#faf8f3] [text-shadow:0px_10px_36px_rgba(5,31,71,0.16)] min-[390px]:text-[40px] tab:text-[60px] lap:text-[72px] desk:text-[80px]">
+          <h1
+            style={{ animationDelay: "180ms" }}
+            className="hero-enter w-full text-center font-display text-[38px] leading-[1.16] font-medium tracking-[-0.02em] text-[#faf8f3] [text-shadow:0px_10px_36px_rgba(5,31,71,0.16)] min-[390px]:text-[40px] tab:text-[60px] lap:text-[72px] desk:text-[80px]">
             Crafting digital products where simplicity meets clarity and purpose
           </h1>
         </div>
         <div
           className="hero-enter flex flex-col items-center gap-3 tab:flex-row"
-          style={{ animationDelay: "120ms" }}
+          style={{ animationDelay: "300ms" }}
         >
           <a
             href={links.portfolio}
-            className="group relative flex h-12 items-center justify-center gap-2.5 overflow-hidden rounded-3xl border border-[#94bdff] bg-[#f7f9fc] pr-5 pl-6 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.2)] transition-[background-color,box-shadow] duration-200 ease-out hover:bg-white hover:shadow-[0px_2px_4px_0px_rgba(11,36,71,0.12),0px_14px_32px_0px_rgba(11,36,71,0.16)] active:bg-[#e9eff7] active:shadow-[0px_1px_1px_0px_rgba(11,36,71,0.1)]"
+            className="group relative flex h-12 items-center justify-center gap-2.5 overflow-hidden rounded-3xl border border-[#94bdff] bg-[#f7f9fc] pr-5 pl-6 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.2)] transition-[background-color,box-shadow,translate,scale] duration-200 ease-out-soft motion-safe:hover:-translate-y-px hover:bg-white hover:shadow-[0px_2px_4px_0px_rgba(11,36,71,0.12),0px_14px_32px_0px_rgba(11,36,71,0.16)] active:translate-y-0 active:scale-[0.98] active:bg-[#e9eff7] active:shadow-[0px_1px_1px_0px_rgba(11,36,71,0.1)]"
           >
             <span className="relative text-[16px] leading-none font-medium whitespace-nowrap text-[#0b2447]">See our portfolio</span>
             <ArrowDown />
@@ -240,7 +258,7 @@ export function Hero() {
           </a>
           <a
             href={links.contact}
-            className="relative flex h-12 items-center justify-center overflow-hidden rounded-3xl border border-[#94bdff] bg-[#121212] px-6 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.2)] transition-[box-shadow,filter] duration-200 ease-out hover:shadow-[0px_2px_4px_0px_rgba(0,0,0,0.2),0px_8px_24px_0px_rgba(11,36,71,0.14)] hover:brightness-125 active:shadow-[0px_1px_1px_0px_rgba(0,0,0,0.2)] active:brightness-100"
+            className="relative flex h-12 items-center justify-center overflow-hidden rounded-3xl border border-[#94bdff] bg-[#121212] px-6 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.2)] transition-[box-shadow,filter,translate,scale] duration-200 ease-out-soft motion-safe:hover:-translate-y-px hover:shadow-[0px_2px_4px_0px_rgba(0,0,0,0.2),0px_8px_24px_0px_rgba(11,36,71,0.14)] hover:brightness-125 active:translate-y-0 active:scale-[0.98] active:shadow-[0px_1px_1px_0px_rgba(0,0,0,0.2)] active:brightness-100"
           >
             <span className="relative text-[16px] leading-none font-medium whitespace-nowrap text-white">Let&apos;s connect</span>
             <span className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_-4px_4px_0px_rgba(148,189,255,0.8)]" />

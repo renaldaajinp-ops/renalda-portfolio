@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { links } from "@/lib/links";
+import { Reveal } from "./Reveal";
 
 const COLUMNS = [
   {
@@ -61,7 +62,7 @@ function Ornament() {
 export function Footer() {
   return (
     <footer className="relative flex flex-col items-center bg-white pt-16 tab:pt-20 desk:pt-24">
-      <div className="flex w-full flex-col items-start gap-9 px-5 pb-14 tab:gap-10 tab:px-10 lap:px-12 desk:w-[1152px] desk:gap-12 desk:px-0">
+      <Reveal className="flex w-full flex-col items-start gap-9 px-5 pb-14 tab:gap-10 tab:px-10 lap:px-12 desk:w-[1152px] desk:gap-12 desk:px-0">
         <div className="flex w-full flex-col items-start gap-4 desk:flex-row desk:items-center desk:justify-between">
           <div className="flex flex-col items-start gap-3 tab:flex-row tab:items-center tab:gap-5">
             <a href={links.home} className="flex items-center gap-3">
@@ -90,7 +91,7 @@ export function Footer() {
           <div className="flex w-full flex-col items-start gap-6 desk:min-w-px desk:flex-[1_0_0] desk:justify-between desk:self-stretch">
             <a
               href={links.emailHref}
-              className="group flex items-center gap-2.5 rounded-full border border-[#e5e7eb] bg-white px-3.5 py-2.5 drop-shadow-[0px_4px_5px_rgba(15,15,41,0.04)] transition-colors duration-200 hover:border-[#d4d8de]"
+              className="group flex items-center gap-2.5 rounded-full border border-[#e5e7eb] bg-white px-3.5 py-2.5 drop-shadow-[0px_4px_5px_rgba(15,15,41,0.04)] transition-[border-color,scale] duration-200 ease-out-soft hover:border-[#d4d8de] active:scale-[0.98]"
             >
               <img src="/svg/mail.svg" alt="" width={20} height={20} className="size-5 shrink-0" />
               <span className="text-[16px] leading-[22px] font-medium whitespace-nowrap text-[#0a0a0a]">{links.email}</span>
@@ -111,7 +112,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${s.label} (opens in a new tab)`}
-                    className="opacity-100 transition-opacity duration-200 hover:opacity-70"
+                    className="opacity-100 transition-[opacity,translate,scale] duration-200 ease-out-soft hover:opacity-70 motion-safe:hover:-translate-y-0.5 active:scale-95"
                   >
                     <img src={`/svg/${s.icon}.svg`} alt="" width={24} height={24} className="size-6" />
                   </a>
@@ -146,7 +147,7 @@ export function Footer() {
           Dekstive Studio is the independent design practice of Renalda Aji, based in Indonesia (GMT+7). Client names, logos, and
           trademarks shown on this site belong to their respective owners and appear for portfolio purposes only.
         </p>
-      </div>
+      </Reveal>
 
       {/* Footer Sky */}
       <div

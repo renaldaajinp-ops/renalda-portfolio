@@ -140,10 +140,13 @@ export function Testimonials() {
               into impactful digital experiences.
             </h2>
           </Reveal>
-          <div className="marquee flex w-full flex-col items-start gap-5 overflow-hidden border-y border-[#e5e7eb] bg-white py-8">
+          <Reveal
+            delay={80}
+            className="marquee flex w-full flex-col items-start gap-5 overflow-hidden border-y border-[#e5e7eb] bg-white py-8"
+          >
             <Row items={ROW_1} direction="left" offset={-148} duration="48s" />
             <Row items={ROW_2} direction="right" offset={-30} duration="56s" />
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

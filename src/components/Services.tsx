@@ -32,8 +32,8 @@ export function Services() {
         </Reveal>
         <ul className="grid w-full grid-cols-1 gap-y-10 tab:grid-cols-2 tab:gap-x-8 tab:gap-y-12 lap:grid-cols-3 desk:gap-x-12 desk:gap-y-[52px]">
           {SERVICES.map((s, i) => (
-            <Reveal as="li" key={s.icon} delay={(i % 3) * 60} className="flex min-w-0 flex-col items-start gap-8">
-              <span className="relative block size-20 shrink-0">
+            <Reveal as="li" key={s.icon} delay={(i % 3) * 70} className="group flex min-w-0 flex-col items-start gap-8">
+              <span className="relative block size-20 shrink-0 transition-[translate] duration-[260ms] ease-out-soft motion-safe:group-hover:-translate-y-1">
                 <img
                   src={`/svg/svc-${s.icon}.svg`}
                   alt=""

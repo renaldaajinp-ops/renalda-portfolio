@@ -44,28 +44,34 @@ function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean
         onClick={onToggle}
         aria-expanded={open}
         aria-controls={id}
-        className="flex w-full cursor-pointer items-center gap-4 py-6 pr-4 pl-5 text-left tab:gap-14 tab:p-6"
+        className="group flex w-full cursor-pointer items-center gap-4 py-6 pr-4 pl-5 text-left tab:gap-14 tab:p-6"
       >
         <span className="flex min-w-px flex-[1_0_0] flex-col">
           <span className="text-[18px] leading-none font-medium text-[#0a090b] tab:text-[20px]">{q}</span>
           <span
             id={id}
-            className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
+            className={`grid transition-[grid-template-rows,opacity] duration-[360ms] ease-out-soft ${
               open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
             }`}
           >
             <span className="overflow-hidden">
-              <span className="block pt-2 text-[16px] leading-[22px] tracking-[-0.18px] text-[#4f5051]">{a}</span>
+              <span
+                className={`block pt-2 text-[16px] leading-[22px] tracking-[-0.18px] text-[#4f5051] transition-[translate] duration-[360ms] ease-out-soft ${
+                  open ? "translate-y-0" : "motion-safe:-translate-y-1"
+                }`}
+              >
+                {a}
+              </span>
             </span>
           </span>
         </span>
-        <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-white p-2.5 shadow-[0px_2.222px_2.222px_0px_rgba(38,45,58,0.08),0px_2.222px_2.222px_-1.667px_rgba(38,45,58,0.08),0px_0px_0px_1.111px_rgba(0,0,0,0.05)]">
+        <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-white p-2.5 transition-[scale] duration-200 ease-out-soft group-active:scale-95 shadow-[0px_2.222px_2.222px_0px_rgba(38,45,58,0.08),0px_2.222px_2.222px_-1.667px_rgba(38,45,58,0.08),0px_0px_0px_1.111px_rgba(0,0,0,0.05)]">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
             <path d="M18 11H6a1 1 0 1 0 0 2h12a1 1 0 1 0 0-2Z" fill="#676D6D" />
             <path
               d="M13 6a1 1 0 1 0-2 0v12a1 1 0 1 0 2 0V6Z"
               fill="#676D6D"
-              className={`origin-center transition-transform duration-300 ease-out ${open ? "scale-y-0" : "scale-y-100"}`}
+              className={`origin-center transition-transform duration-[360ms] ease-out-soft ${open ? "scale-y-0" : "scale-y-100"}`}
             />
           </svg>
         </span>
@@ -102,7 +108,9 @@ export function Faq() {
             <div className="relative flex w-full flex-col items-center gap-[52px] lap:w-[800px]">
               <div className="flex w-full flex-col items-start gap-4">
                 {FAQS.map((f, i) => (
-                  <FaqItem key={f.q} q={f.q} a={f.a} open={open === i} onToggle={() => setOpen(open === i ? null : i)} />
+                  <Reveal key={f.q} delay={Math.min(i, 4) * 50} className="w-full">
+                    <FaqItem q={f.q} a={f.a} open={open === i} onToggle={() => setOpen(open === i ? null : i)} />
+                  </Reveal>
                 ))}
               </div>
               <p className="w-full text-center text-[20px] leading-[1.3] text-[#878787] tab:w-[600px]">

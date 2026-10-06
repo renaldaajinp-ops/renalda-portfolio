@@ -2,6 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
+import { Reveal } from "./Reveal";
 
 export type Step = { title: string; body: string; visual: string };
 
@@ -11,7 +12,7 @@ function StepButton({ step, index, active, onSelect }: { step: Step; index: numb
       type="button"
       onClick={onSelect}
       aria-pressed={active}
-      className={`flex w-full cursor-pointer flex-col items-start gap-4 text-left transition-opacity duration-300 ease-out ${
+      className={`flex w-full cursor-pointer flex-col items-start gap-4 text-left transition-[opacity,scale] duration-300 ease-out-soft active:scale-[0.99] ${
         active ? "opacity-100" : "opacity-50 hover:opacity-75"
       }`}
     >
@@ -42,22 +43,22 @@ export function ProcessSteps({ steps }: { steps: Step[] }) {
   return (
     <div className="relative grid w-full grid-cols-1 gap-y-9 tab:grid-cols-2 tab:gap-x-8 tab:gap-y-12 lap:grid-cols-3 desk:h-[640px] desk:grid-cols-[1fr_544px_1fr] desk:grid-rows-[auto_auto_auto] desk:content-center desk:gap-x-16 desk:gap-y-20 wide:max-w-[1280px]">
       {/* Window is 544×500; the exported SVG adds its drop shadow around it (572×541, window at 13.89, 1.85). */}
-      <div className="relative mb-1 aspect-[544/500] w-full justify-self-center tab:col-span-2 tab:mb-2 tab:w-[544px] lap:col-span-3 desk:col-span-1 desk:col-start-2 desk:row-span-3 desk:row-start-1 desk:mb-0 desk:self-center">
+      <Reveal className="relative mb-1 aspect-[544/500] w-full justify-self-center tab:col-span-2 tab:mb-2 tab:w-[544px] lap:col-span-3 desk:col-span-1 desk:col-start-2 desk:row-span-3 desk:row-start-1 desk:mb-0 desk:self-center">
         {steps.map((s, i) => (
           <div
             key={s.title}
             aria-hidden={i !== active}
-            className={`absolute top-[-0.37%] left-[-2.553%] h-[108.2%] w-[105.147%] transition-opacity duration-500 ease-out ${
-              i === active ? "opacity-100" : "opacity-0"
+            className={`absolute top-[-0.37%] left-[-2.553%] h-[108.2%] w-[105.147%] transition-[opacity,translate] duration-500 ease-out-soft ${
+              i === active ? "translate-y-0 opacity-100" : "opacity-0 motion-safe:translate-y-1.5"
             }`}
             dangerouslySetInnerHTML={{ __html: s.visual }}
           />
         ))}
-      </div>
+      </Reveal>
       {steps.map((s, i) => (
-        <div key={s.title} className={place[i]}>
+        <Reveal key={s.title} delay={(i % 3) * 70} className={place[i]}>
           <StepButton step={s} index={i} active={i === active} onSelect={() => setActive(i)} />
-        </div>
+        </Reveal>
       ))}
     </div>
   );

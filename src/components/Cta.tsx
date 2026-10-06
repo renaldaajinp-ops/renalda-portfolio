@@ -33,7 +33,7 @@ export function Cta() {
               <CopyEmail />
               <a
                 href={links.emailHref}
-                className="relative flex h-12 shrink-0 items-center justify-center overflow-hidden rounded-3xl border border-[#94bdff] bg-[#121212] px-6 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.2)] transition-[box-shadow,filter] duration-200 ease-out hover:shadow-[0px_2px_4px_0px_rgba(0,0,0,0.2),0px_8px_24px_0px_rgba(11,36,71,0.14)] hover:brightness-125 active:brightness-100"
+                className="relative flex h-12 shrink-0 items-center justify-center overflow-hidden rounded-3xl border border-[#94bdff] bg-[#121212] px-6 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.2)] transition-[box-shadow,filter,translate,scale] duration-200 ease-out-soft motion-safe:hover:-translate-y-px hover:shadow-[0px_2px_4px_0px_rgba(0,0,0,0.2),0px_8px_24px_0px_rgba(11,36,71,0.14)] hover:brightness-125 active:translate-y-0 active:scale-[0.98] active:brightness-100"
               >
                 <span className="relative text-[16px] leading-none font-medium whitespace-nowrap text-white">Let&apos;s connect</span>
                 <span className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[inset_0px_-4px_4px_0px_rgba(148,189,255,0.8)]" />
